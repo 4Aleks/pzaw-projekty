@@ -4,9 +4,9 @@
   <h1><%= title %></h1>
   <ul id="categories">
     <% categories.forEach(function(category){ %>
-    <li><%= category %></li>
+    <li><a href="/cards/<%= category.id %>"><%= category.name %></a></li>
     <% }) %>
   </ul>
 </main>
 
-<%- include("head.partial.ejs") %>
+<%- include("foot.partial.ejs") %>
