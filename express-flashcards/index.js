@@ -1,12 +1,19 @@
 import express from "express";
 import flashcards from "./models/flashcards.js";
-
+import morgan from "morgan";
 const port = 8000;
 
 const app = express();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded());
+app.use(morgan("dev"));
+
+function log_request(req, res, next) {
+  console.log(`Request ${req.method} ${req.path}`);
+  next();
+}
+app.use(log_request);
 
 app.get("/cards", (req, res) => {
   res.render("categories", {
