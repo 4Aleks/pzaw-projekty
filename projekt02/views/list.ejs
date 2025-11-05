@@ -1,0 +1,10 @@
+<%- include('partials/head') %>
+<main>
+  <h2>Artykuły o klubach piłkarskich</h2>
+  <ul>
+    <% articles.forEach(a => { %>
+      <li><a href="/articles/<%= a.article_id %>"><%= a.title %></a></li>
+    <% }) %>
+  </ul>
+</main>
+<%- include('partials/foot') %>

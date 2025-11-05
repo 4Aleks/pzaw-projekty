@@ -1,0 +1,22 @@
+<%- include('partials/head') %>
+<main>
+  <h2><%= article.title %></h2>
+  <p><%= article.content %></p>
+
+  <h3>Komentarze</h3>
+  <ul>
+    <% comments.forEach(c => { %>
+      <li><strong><%= c.name %>:</strong> <%= c.text %></li>
+    <% }) %>
+  </ul>
+
+  <h3>Dodaj komentarz</h3>
+  <form method="POST" action="/articles/<%= article.article_id %>/comments">
+    <input type="text" name="name" placeholder="Twoje imię" required />
+    <textarea name="text" placeholder="Twój komentarz" required></textarea>
+    <button type="submit">Wyślij</button>
+  </form>
+
+  <p><a href="/">← Wróć do listy</a></p>
+</main>
+<%- include('partials/foot') %>
