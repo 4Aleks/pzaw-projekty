@@ -1,2 +1,3 @@
 # pzaw-projekty
-# to run command node.js
+#npm install
+# włącz komendą node.js
