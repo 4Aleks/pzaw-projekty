@@ -1,3 +1,5 @@
 # pzaw-projekty
-#npm install
-# włącz komendą node.js
+aby uruchomić wpisz
+npm install;
+node index.js
+# włącz komendą node index.js
