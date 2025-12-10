@@ -3,6 +3,7 @@ import Database from "better-sqlite3";
 const db_path = "./db.sqlite";
 const db = new Database(db_path);
 
+
 db.exec(`
   CREATE TABLE IF NOT EXISTS articles (
     article_id INTEGER PRIMARY KEY,
@@ -10,15 +11,13 @@ db.exec(`
     content TEXT NOT NULL
   );
 
-  CREATE
-// -------------------------------------- TABLE IF NOT EXISTS comments (
+  CREATE TABLE IF NOT EXISTS comments (
     comment_id INTEGER PRIMARY KEY,
     article_id INTEGER NOT NULL REFERENCES articles(article_id) ON DELETE CASCADE,
     name TEXT NOT NULL,
     text TEXT NOT NULL
   );
 `);
-
 
 
 
@@ -32,24 +31,27 @@ if (articleCount === 0) {
     VALUES (?, ?)
   `);
 
-
   const articles = [
     {
       title: "FC Barcelona",
-      content: "FC Barcelona to jeden z najbardziej rozpoznawalnych klubów piłkarskich świata. Słynie z ofensywnego stylu gry i filozofii tiki-taka."
+      content:
+        "FC Barcelona to jeden z najbardziej rozpoznawalnych klubów piłkarskich świata. Słynie z ofensywnego stylu gry i filozofii tiki-taka.",
     },
     {
       title: "Real Madryt",
-      content: "Real Madryt to najbardziej utytułowany klub w historii Ligi Mistrzów. Znany jest z silnej kadry i zwycięskiej mentalności."
+      content:
+        "Real Madryt to najbardziej utytułowany klub w historii Ligi Mistrzów. Znany jest z silnej kadry i zwycięskiej mentalności.",
     },
     {
       title: "Liverpool FC",
-      content: "Liverpool to klub o bogatej historii, słynący z atmosfery na Anfield oraz filozofii gry w stylu heavy metal football."
+      content:
+        "Liverpool to klub o bogatej historii, słynący z atmosfery na Anfield oraz filozofii gry w stylu heavy metal football.",
     },
     {
       title: "Manchester United",
-      content: "Manchester United to jeden z najpopularniejszych klubów na świecie, znany z ery Sir Alexa Fergusona i ofensywnego stylu gry."
-    }
+      content:
+        "Manchester United to jeden z najpopularniejszych klubów na świecie, znany z ery Sir Alexa Fergussona i ofensywnego stylu gry.",
+    },
   ];
 
   const insertComment = db.prepare(`
@@ -60,13 +62,11 @@ if (articleCount === 0) {
   articles.forEach((article, index) => {
     const info = insertArticle.run(article.title, article.content);
 
-
     if (index === 0) {
       insertComment.run(info.lastInsertRowid, "mati", "bedzie 0:2 jutro");
     }
   });
 }
-
 
 
 
@@ -110,5 +110,5 @@ export default {
   getArticle,
   addComment,
   updateComment,
-  deleteComment
+  deleteComment,
 };
