@@ -1,3 +1,21 @@
+html {
+    --backdrop: #830;
+    --background: #ded;
+    --text-color-normal: #222;
+    --text-color-link: #44e;
+    background-color: var(--backdrop);
+    color: var(--text-color-normal);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 11pt;
+}
+
+html[data-theme='dark'] {
+    --backdrop: #510;
+    --background: #483232;
+    --text-color-normal: #ddd;
+    --text-color-link: #77f;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;

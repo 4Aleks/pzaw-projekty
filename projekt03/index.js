@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
 import db from "./models/database.js";
+import cookieParser from "cookie-parser";
+import settings from "./models/settings.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,6 +17,18 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser());
+
+const settingsRouter = express.Router();
+settingsRouter.use("/toggle-theme", settings.themeToggle);
+app.use("/settings", settingsRouter);
+
+function settingsLocals(req, res, next) {
+  res.locals.app = settings.getSettings(req);
+  res.locals.page = req.path;
+  next();
+}
+app.use(settingsLocals);
 
 app.get("/", (req, res) => {
   const articles = db.getArticles();

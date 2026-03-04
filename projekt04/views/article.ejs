@@ -6,28 +6,48 @@
 
   <h3>Komentarze</h3>
 
-  <% comments.forEach(comment => { %>
+  <% article.comments.forEach(comment => { %>
 
     <div class="comment">
-      <p><strong><%= comment.name %>:</strong> <%= comment.text %></p>
+      <p>
+        <strong><%= comment.name %>:</strong>
+        <%= comment.text %>
+      </p>
 
-      <!-- Przyciski -->
+      <!-- Edytuj -->
       <button onclick="document.getElementById('editForm_<%= comment.comment_id %>').style.display='block'">
         Edytuj
       </button>
 
-      <form action="/comments/<%= comment.comment_id %>/delete" method="POST" style="display:inline;">
-        <input type="hidden" name="articleId" value="<%= article.article_id %>">
-        <button type="submit" onclick="return confirm('Na pewno usunąć?')">Usuń</button>
+      <!-- Usuń -->
+      <form action="/comments/<%= comment.comment_id %>/delete"
+            method="POST"
+            style="display:inline;">
+        <input type="hidden"
+               name="articleId"
+               value="<%= article.article_id %>">
+        <button type="submit"
+                onclick="return confirm('Na pewno usunąć?')">
+          Usuń
+        </button>
       </form>
 
-      <!-- Formularz edycji (ukryty) -->
-      <div id="editForm_<%= comment.comment_id %>" style="display:none; margin-top:10px;">
-        <form action="/comments/<%= comment.comment_id %>/edit" method="POST">
-          <input type="hidden" name="articleId" value="<%= article.article_id %>">
+      <!-- Formularz edycji -->
+      <div id="editForm_<%= comment.comment_id %>"
+           style="display:none; margin-top:10px;">
+
+        <form action="/comments/<%= comment.comment_id %>/edit"
+              method="POST">
+
+          <input type="hidden"
+                 name="articleId"
+                 value="<%= article.article_id %>">
 
           <label>Imię:</label>
-          <input type="text" name="name" value="<%= comment.name %>" required>
+          <input type="text"
+                 name="name"
+                 value="<%= comment.name %>"
+                 required>
 
           <label>Komentarz:</label>
           <textarea name="text" required><%= comment.text %></textarea>
@@ -46,11 +66,19 @@
 
   <% }) %>
 
-
   <h3>Dodaj komentarz</h3>
-  <form method="POST" action="/articles/<%= article.article_id %>/comments">
-    <input type="text" name="name" placeholder="Twoje imię" required />
-    <textarea name="text" placeholder="Twój komentarz" required></textarea>
+  <form method="POST"
+        action="/articles/<%= article.article_id %>/comments">
+
+    <input type="text"
+           name="name"
+           placeholder="Twoje imię"
+           required />
+
+    <textarea name="text"
+              placeholder="Twój komentarz"
+              required></textarea>
+
     <button type="submit">Wyślij</button>
   </form>
 
