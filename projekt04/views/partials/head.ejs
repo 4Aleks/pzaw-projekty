@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html data-theme="<%= app.theme %>" lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title><%= title %></title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <div class="container">
 <header>
-<nav>
-  <% if (page !== "/") { %>
-    <a href="/">Powrót do listy artykułów</a>
-  <% } %>
-</nav>
-
-<section class="controls">
-  <a href="/settings/toggle-theme?next=<%= encodeURIComponent(page) %>">
-    <% if (app.theme === "dark") { %>
-      <strong>Ciemny</strong> | Jasny
+  <nav>
+    <a href="/">Start</a>
+    <% if (user) { %>
+      <span>Witaj, <b><%= user.username %></b></span>
+      <% if (user.role === 'admin') { %><span class="admin-badge">ADMIN</span><% } %>
+      <a href="/logout">Wyloguj</a>
     <% } else { %>
-      Ciemny | <strong>Jasny</strong>
+      <a href="/login">Zaloguj</a>
+      <a href="/register">Rejestracja</a>
     <% } %>
-  </a>
-</section>
+  </nav>
+  <a href="/settings/toggle-theme?next=<%= encodeURIComponent(page) %>"> Motyw</a>
 </header>

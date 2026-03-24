@@ -1,0 +1,22 @@
+<%- include('partials/head') %>
+<main>
+  <h2>Załóż nowe konto</h2>
+  <p>Wprowadź dane, aby zarejestrować się w serwisie.</p>
+  
+  <form action="/register" method="POST">
+    <div>
+      <label>Login (min. 3 znaki):</label><br>
+      <input type="text" name="username" required minlength="3" maxlength="20" placeholder="Twój login">
+    </div>
+    <br>
+    <div>
+      <label>Hasło (min. 6 znaków):</label><br>
+      <input type="password" name="password" required minlength="6" placeholder="Twoje hasło">
+    </div>
+    <br>
+    <button type="submit">Zarejestruj się</button>
+  </form>
+  
+  <p>Masz już konto? <a href="/login">Zaloguj się tutaj</a></p>
+</main>
+<%- include('partials/foot') %>

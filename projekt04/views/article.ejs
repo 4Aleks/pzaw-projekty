@@ -1,88 +1,46 @@
 <%- include('partials/head') %>
-
 <main>
-  <h2><%= article.title %></h2>
-  <p><%= article.content %></p>
-
-  <h3>Komentarze</h3>
-
-  <% article.comments.forEach(comment => { %>
-
-    <div class="comment">
-      <p>
-        <strong><%= comment.name %>:</strong>
-        <%= comment.text %>
-      </p>
-
-      <!-- Edytuj -->
-      <button onclick="document.getElementById('editForm_<%= comment.comment_id %>').style.display='block'">
-        Edytuj
-      </button>
-
-      <!-- Usuń -->
-      <form action="/comments/<%= comment.comment_id %>/delete"
-            method="POST"
-            style="display:inline;">
-        <input type="hidden"
-               name="articleId"
-               value="<%= article.article_id %>">
-        <button type="submit"
-                onclick="return confirm('Na pewno usunąć?')">
-          Usuń
-        </button>
+  <% if (user && user.role === 'admin') { %>
+    <section style="background: #eee; padding: 15px; border: 2px dashed #333; margin-bottom: 20px; color: #000;">
+      <h4>Edytuj Artykuł (Admin)</h4>
+      <form action="/articles/<%= article.article_id %>/edit" method="POST">
+        <input type="text" name="title" value="<%= article.title %>" required minlength="3">
+        <textarea name="content" required minlength="10" rows="5"><%= article.content %></textarea>
+        <button type="submit">Zapisz zmiany w artykule</button>
       </form>
+    </section>
+  <% } %>
 
-      <!-- Formularz edycji -->
-      <div id="editForm_<%= comment.comment_id %>"
-           style="display:none; margin-top:10px;">
+  <article>
+    <h2><%= article.title %></h2>
+    <p><%= article.content %></p>
+  </article>
 
-        <form action="/comments/<%= comment.comment_id %>/edit"
-              method="POST">
-
-          <input type="hidden"
-                 name="articleId"
-                 value="<%= article.article_id %>">
-
-          <label>Imię:</label>
-          <input type="text"
-                 name="name"
-                 value="<%= comment.name %>"
-                 required>
-
-          <label>Komentarz:</label>
-          <textarea name="text" required><%= comment.text %></textarea>
-
-          <button type="submit">Zapisz</button>
-
-          <button type="button"
-                  onclick="document.getElementById('editForm_<%= comment.comment_id %>').style.display='none'">
-            Anuluj
-          </button>
+  <hr>
+  <h3>Komentarze</h3>
+  <% article.comments.forEach(comment => { %>
+    <div class="comment">
+      <p><strong><%= comment.name %>:</strong> <%= comment.text %></p>
+      <% if (user && (user.role === 'admin' || user.id === comment.user_id)) { %>
+        <form action="/comments/<%= comment.comment_id %>/delete" method="POST" style="display:inline;">
+          <input type="hidden" name="articleId" value="<%= article.article_id %>">
+          <button type="submit" onclick="return confirm('Usunąć komentarz?')">Usuń</button>
         </form>
-      </div>
+      <% } %>
     </div>
-
-    <hr>
-
   <% }) %>
 
-  <h3>Dodaj komentarz</h3>
-  <form method="POST"
-        action="/articles/<%= article.article_id %>/comments">
-
-    <input type="text"
-           name="name"
-           placeholder="Twoje imię"
-           required />
-
-    <textarea name="text"
-              placeholder="Twój komentarz"
-              required></textarea>
-
-    <button type="submit">Wyślij</button>
-  </form>
-
-  <p><a href="/">← Wróć do listy</a></p>
+  <% if (user) { %>
+    <section style="margin-top: 20px;">
+      <h4>Dodaj komentarz jako <%= user.username %></h4>
+      <form action="/articles/<%= article.article_id %>/comments" method="POST">
+        <textarea name="text" placeholder="Wpisz treść komentarza..." required minlength="2"></textarea>
+        <button type="submit">Wyślij</button>
+      </form>
+    </section>
+  <% } else { %>
+    <p><a href="/login">Zaloguj się</a>, aby dodać komentarz.</p>
+  <% } %>
+  <p><a href="/">← Powrót do listy</a></p>
 </main>
-
 <%- include('partials/foot') %>

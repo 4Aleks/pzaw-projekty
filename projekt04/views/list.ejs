@@ -1,32 +1,38 @@
 <%- include("partials/head") %>
-
 <main>
   <h1><%= title %></h1>
 
-  <% if (last_viewed_articles?.length > 0) { %>
-    <h2>Ostatnio przeglądane</h2>
-    <ul id="recently_viewed">
-      <% last_viewed_articles.forEach(function(article){ %>
-        <li>
-          <a href="/articles/<%= article.article_id %>">
-            <%= article.title %>
-          </a>
-        </li>
-      <% }) %>
-    </ul>
-
-    <h2>Wszystkie artykuły</h2>
+  <% if (last_viewed_clubs && last_viewed_clubs.length > 0) { %>
+    <section style="background: rgba(0,0,0,0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+      <h3 style="margin-top:0;">Ostatnio przeglądane kluby:</h3>
+      <ul style="display: flex; list-style: none; gap: 20px; padding: 0;">
+        <% last_viewed_clubs.forEach(club => { %>
+          <li><a href="/articles/<%= club.article_id %>">⚽ <%= club.title %></a></li>
+        <% }) %>
+      </ul>
+    </section>
   <% } %>
 
-  <ul id="articles">
-    <% articles.forEach(function(article){ %>
-      <li>
-        <a href="/articles/<%= article.article_id %>">
-          <%= article.title %>
+  <% if (user && user.role === 'admin') { %>
+    <section style="background: #f0f0f0; padding: 15px; border: 1px solid #333; margin-bottom: 25px; color: #000;">
+      <h3>Dodaj nowy klub piłkarski</h3>
+      <form action="/articles" method="POST">
+        <input type="text" name="title" placeholder="Tytuł artykułu" required minlength="3">
+        <textarea name="content" placeholder="Opis klubu..." required minlength="10" rows="4"></textarea>
+        <button type="submit">Dodaj Artykuł</button>
+      </form>
+    </section>
+  <% } %>
+
+  <h3>Wszystkie Kluby</h3>
+  <ul>
+    <% articles.forEach(article => { %>
+      <li style="margin-bottom: 10px;">
+        <a href="/articles/<%= article.article_id %>" style="font-size: 1.2em;">
+            <strong><%= article.title %></strong>
         </a>
       </li>
     <% }) %>
   </ul>
 </main>
-
 <%- include("partials/foot") %>
