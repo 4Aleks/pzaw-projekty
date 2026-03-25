@@ -7,7 +7,7 @@
       <h3 style="margin-top:0;">Ostatnio przeglądane kluby:</h3>
       <ul style="display: flex; list-style: none; gap: 20px; padding: 0;">
         <% last_viewed_clubs.forEach(club => { %>
-          <li><a href="/articles/<%= club.article_id %>">⚽ <%= club.title %></a></li>
+          <li><a href="/articles/<%= club.article_id %>"> <%= club.title %></a></li>
         <% }) %>
       </ul>
     </section>
@@ -15,7 +15,7 @@
 
   <% if (user && user.role === 'admin') { %>
     <section style="background: #f0f0f0; padding: 15px; border: 1px solid #333; margin-bottom: 25px; color: #000;">
-      <h3>Dodaj nowy klub piłkarski</h3>
+      <h3>Dodaj Artykuł</h3>
       <form action="/articles" method="POST">
         <input type="text" name="title" placeholder="Tytuł artykułu" required minlength="3">
         <textarea name="content" placeholder="Opis klubu..." required minlength="10" rows="4"></textarea>

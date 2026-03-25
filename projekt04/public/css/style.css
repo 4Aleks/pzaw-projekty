@@ -1,25 +1,32 @@
 html {
-    --backdrop: #830;
-    --background: #ded;
-    --text-color-normal: #222;
-    --text-color-link: #44e;
-    background-color: var(--backdrop);
-    color: var(--text-color-normal);
+    background-color: rgb(36, 0, 136);
+    color: #222;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 11pt;
 }
 
+
 html[data-theme='dark'] {
-    --backdrop: #510;
-    --background: #483232;
-    --text-color-normal: #ddd;
-    --text-color-link: #77f;
+    background-color: rgb(44, 0, 85);
+    color: #ddd;
+}
+
+html[data-theme='dark'] body {
+    background-color: rgb(25, 1, 78);
+}
+
+html[data-theme='dark'] main {
+    background-color: rgb(75, 4, 48);
+}
+
+html[data-theme='dark'] footer {
+    color: #ddd;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--backdrop);
+    background-color: rgb(36, 0, 136);
 }
 
 header {
@@ -37,7 +44,7 @@ header nav a {
 }
 
 main {
-    background-color: var(--background);
+    background-color: #ded;
     width: 90%;
     max-width: 800px;
     margin: 20px auto;
@@ -47,8 +54,8 @@ main {
 }
 
 a {
-    color: var(--text-color-link);
     text-decoration: none;
+    color: #44e; 
 }
 
 a:hover {

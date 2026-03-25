@@ -11,9 +11,8 @@ npm install express-session
 npm install cookie-parser
 # włącz komendą npm run dev
 
-#uzytkowanie
-# Projekt: Blog o Klubach Piłkarskich 
-
+# uzytkowanie
+ 
 Rejestracja i Logowanie z użyciem loginu i hasla
 
 można przegladac artykuly i komentarze dodane do nich
