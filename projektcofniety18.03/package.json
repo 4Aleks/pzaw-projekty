@@ -1,0 +1,20 @@
+{
+  "name": "kluby-blog",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file .env ./index.js",
+    "populate_db": "node utils/populate_db.js",
+    "generate_env": "./utils/generate_env.sh > .env"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "argon2": "^0.44.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.3.1",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "morgan": "^1.10.1"
+  }
+}

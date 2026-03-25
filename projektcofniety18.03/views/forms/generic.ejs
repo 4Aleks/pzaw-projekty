@@ -1,0 +1,29 @@
+<form class="form" action="<%- action %>" method="<%- method %>">
+  <% fields.forEach((field) => { %>
+  <div class="form-row" style="margin-bottom: 10px;">
+    <label for="field_<%- field.name %>" style="display: inline-block; width: 150px;">
+      <%= field.display_name %>:
+    </label>
+    <div class="form-input" style="display: inline-block;">
+      <input
+        type="<%- field.type %>"
+        name="<%- field.name %>"
+        id="field_<%- field.name %>"
+        <% if (field.required) { %> required <% } %>
+        <% if (field.min_length) { %> minlength="<%- field.min_length %>" <% } %>
+        <% if (field.max_length) { %> maxlength="<%- field.max_length %>" <% } %>
+        <% if (data && data[field.name]) { %> value="<%= data[field.name] %>" <% } %>
+      />
+      <% if (errors && errors[field.name]) { %>
+        <span class="form-error" style="color: red; margin-left: 10px;">
+          <%= errors[field.name] %>
+        </span>
+      <% } %>
+    </div>
+  </div>
+  <% }) %>
+  
+  <div class="form-row" style="margin-top: 15px;">
+    <button class="submit-button" type="submit"><%= locals.submit_text || "Wyślij" %></button>
+  </div>
+</form>

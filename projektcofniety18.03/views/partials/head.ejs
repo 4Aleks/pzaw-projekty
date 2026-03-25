@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html data-theme="<%= app.theme %>" lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="container">
+<header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+  
+  <nav>
+    <% if (page !== "/") { %>
+      <a href="/">Powrót do listy</a> |
+    <% } %>
+
+    <% if (locals.user) { %>
+      <span>Witaj, <strong><%= locals.user.username %></strong>!</span> |
+      <a href="/auth/logout">Wyloguj się</a>
+    <% } else { %>
+      <a href="/auth/login">Zaloguj się</a> |
+      <a href="/auth/signup">Zarejestruj się</a>
+    <% } %>
+  </nav>
+
+  <section class="controls">
+    <a href="/settings/toggle-theme?next=<%= encodeURIComponent(page) %>">
+      <% if (app.theme === "dark") { %>
+        <strong>Ciemny</strong> | Jasny
+      <% } else { %>
+        Ciemny | <strong>Jasny</strong>
+      <% } %>
+    </a>
+  </section>
+
+</header>

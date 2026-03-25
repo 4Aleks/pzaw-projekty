@@ -1,0 +1,32 @@
+<%- include("partials/head") %>
+
+<main>
+  <h1><%= title %></h1>
+
+  <% if (last_viewed_articles?.length > 0) { %>
+    <h2>Ostatnio przeglądane</h2>
+    <ul id="recently_viewed">
+      <% last_viewed_articles.forEach(function(article){ %>
+        <li>
+          <a href="/articles/<%= article.article_id %>">
+            <%= article.title %>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+
+    <h2>Wszystkie artykuły</h2>
+  <% } %>
+
+  <ul id="articles">
+    <% articles.forEach(function(article){ %>
+      <li>
+        <a href="/articles/<%= article.article_id %>">
+          <%= article.title %>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+</main>
+
+<%- include("partials/foot") %>

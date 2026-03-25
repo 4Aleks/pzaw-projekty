@@ -1,0 +1,13 @@
+<%- include("partials/head") %>
+
+<main>
+  <h1><%= title %></h1>
+  <div>
+    <%- include("forms/generic", form) %>
+  </div>
+  <p style="margin-top: 20px;">
+    Masz już konto? <a href="/auth/login">Zaloguj się!</a>
+  </p>
+</main>
+
+<%- include("partials/foot") %>
